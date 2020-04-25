@@ -1,0 +1,22 @@
+{
+  "name": "mummy-boom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furu-phuctrung/mummy-boom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/furu-phuctrung/mummy-boom/issues"
+  },
+  "homepage": "https://github.com/furu-phuctrung/mummy-boom#readme",
+  "dependencies": {
+    "phaser": "^3.22.0"
+  }
+}

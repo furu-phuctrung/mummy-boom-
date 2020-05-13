@@ -11,7 +11,6 @@ let gameObjects = {
     player: new Player()
 };
 
-
 /**
  * Config game window
  * 
@@ -23,8 +22,8 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
-            debug: false
+            fps: 60,
+            gravity: { y: 0 }
         }
     },
     scene: {
@@ -49,8 +48,10 @@ function create ()
     for (var gameObject in gameObjects){
         gameObjects[gameObject].render();
     }
+    this.physics.add.collider(gameObjects.player.model, gameObjects.map.model);
 }
 
 function update ()
 {
+    gameObjects.player.update();
 }

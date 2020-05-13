@@ -5,12 +5,12 @@ export default class Map{
         
     }
     render(){
-        this.map = this.scene.physics.add.staticGroup();
+        this.model = this.scene.physics.add.staticGroup();
         this.scene.add.image(400, 300, 'sky');
 
-        this.map.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.map.create(600, 400, 'ground');
-        this.map.create(50, 250, 'ground');
-        this.map.create(750, 220, 'ground');
+        this.model.create(400, 568, 'ground').setScale(2).refreshBody();
+        this.model.create(600, 400, 'ground');
+        this.model.create(50, 250, 'ground');
+        this.model.create(750, 220, 'ground');
     }
 }

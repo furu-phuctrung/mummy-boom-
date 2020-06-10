@@ -1,15 +1,5 @@
 import './node_modules/phaser/dist/phaser.js'
-import Map from './game-object/platforms/map.js'
-import Player from './game-object/characters/player.js';
-
-/**
- * Set up game objects
- * 
- */
-let gameObjects = {
-    map: new Map(),
-    player: new Player()
-};
+import PlayScene from './scenes/PlayScene.js';
 
 /**
  * Config game window
@@ -26,32 +16,6 @@ let config = {
             gravity: { y: 0 }
         }
     },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+    scene: [PlayScene]
 };
 let game = new Phaser.Game(config);
-
-function preload ()
-{
-    for (var gameObject in gameObjects){
-        gameObjects[gameObject].scene = this;
-        gameObjects[gameObject].preload();
-    }
-}
-
-
-function create ()
-{
-    for (var gameObject in gameObjects){
-        gameObjects[gameObject].render();
-    }
-    this.physics.add.collider(gameObjects.player.model, gameObjects.map.model);
-}
-
-function update ()
-{
-    gameObjects.player.update();
-}

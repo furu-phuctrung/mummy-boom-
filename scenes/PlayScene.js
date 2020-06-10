@@ -30,9 +30,10 @@ export default class PlayScene extends Phaser.Scene {
     create() {
         this.map = new Map(this,this.config.key.ground,this.config.key.background);
         this.player = new Player(this,50,0,this.config.key.player);
+        this.physics.add.collider(this.player,this.map);
     }
 
     update() {
-        
+        this.player.move();
     }
 } 

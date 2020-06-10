@@ -11,8 +11,6 @@ export default class Map extends Phaser.Physics.Arcade.StaticGroup{
         this.background = scene.add.image(0,0,background);
         this.background.setOrigin(0,0);
         this.renderMap();
-
-        scene.physics.add.existing(this,true);
     }
 
     renderMap(){
@@ -88,9 +86,11 @@ export default class Map extends Phaser.Physics.Arcade.StaticGroup{
             y: startY,
         };
         for(let i = 0; i<count; i++){
-            let newGround = this.create(startX,endpoint.y,this.ground.key);
+            let newGround = new Phaser.Physics.Arcade.Image(this.scene, startX, endpoint.y, this.ground.key);
+            this.scene.add.existing(newGround);
             endpoint.y+=this.ground.width;
             newGround.setOrigin(0,0);
+            this.add(newGround);
         }
         return endpoint;
     }
@@ -100,9 +100,11 @@ export default class Map extends Phaser.Physics.Arcade.StaticGroup{
             y: startY,
         };
         for(let i = 0; i<count; i++){
-            let newGround = this.create(endpoint.x,startY,this.ground.key);
+            let newGround = new Phaser.Physics.Arcade.Image(this.scene, endpoint.x, startY, this.ground.key);
+            this.scene.add.existing(newGround);
             endpoint.x+=this.ground.width;
             newGround.setOrigin(0,0);
+            this.add(newGround);
         }
         return endpoint;
     }

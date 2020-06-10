@@ -16,45 +16,70 @@ export default class Map extends Phaser.Physics.Arcade.StaticGroup{
     }
 
     renderMap(){
-        let verticalEndpoint = this.renderVerticalGrounds(0,0,12);
-        verticalEndpoint.x += 100;
-        verticalEndpoint.y = 0;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,4);
-        verticalEndpoint.y += 50;
-        this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,5);
-        verticalEndpoint.y -= 100;
-        verticalEndpoint.x += 50;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,1);
-        verticalEndpoint.y -= 100;
-        verticalEndpoint.x += 100;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,1);
-        verticalEndpoint.y -= 100;
-        verticalEndpoint.x += 100;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,1);
-        verticalEndpoint.x += 100;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,1);
-        verticalEndpoint.y -= 100;
-        verticalEndpoint.x += 100;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,1);
-        verticalEndpoint.x += 50;
-        verticalEndpoint.y += 50;
-        this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,3);
-        verticalEndpoint.x += 50;
-        verticalEndpoint.y -= 50;
-        verticalEndpoint = this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,2);
-        verticalEndpoint = this.renderVerticalGrounds(200,350,3);
-        verticalEndpoint.x += 100;
-        verticalEndpoint.y -= 250;
-        this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,5);
-        verticalEndpoint.x += 100;
-        this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,5);
-        verticalEndpoint.x += 100;
-        verticalEndpoint.y -= 100;
-        this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,5);
-        verticalEndpoint.x += 150;
-        verticalEndpoint.y += 200;
-        this.renderVerticalGrounds(verticalEndpoint.x,verticalEndpoint.y,3);
 
+        //Vertical
+        let endpoint = this.renderVerticalGrounds(0,0,12);
+        endpoint.x += 100;
+        endpoint.y = 0;
+        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,4);
+        endpoint.y += 50;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
+        endpoint.y -= 100;
+        endpoint.x += 50;
+        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
+        endpoint.y -= 100;
+        endpoint.x += 100;
+        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
+        endpoint.y -= 100;
+        endpoint.x += 100;
+        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
+        endpoint.x += 100;
+        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
+        endpoint.y -= 100;
+        endpoint.x += 100;
+        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
+        endpoint.x += 50;
+        endpoint.y += 50;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,3);
+        endpoint.x += 50;
+        endpoint.y -= 50;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,2);
+        endpoint.x += 100;
+        endpoint.y -= 100;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,12);
+        endpoint = this.renderVerticalGrounds(200,350,3);
+        endpoint.x += 100;
+        endpoint.y -= 250;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
+        endpoint.x += 100;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
+        endpoint.x += 100;
+        endpoint.y -= 100;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
+        endpoint.x += 150;
+        endpoint.y += 200;
+        this.renderVerticalGrounds(endpoint.x,endpoint.y,3);
+
+
+        //Horizontal
+        endpoint = this.renderHorizontalGrounds(150,0,12);
+        endpoint.x = 250;
+        endpoint.y += 150;
+        endpoint = this.renderHorizontalGrounds(endpoint.x,endpoint.y,5);
+        endpoint.x = 150;
+        endpoint.y += 100;
+        endpoint = this.renderHorizontalGrounds(endpoint.x,endpoint.y,3);
+        endpoint.x += 400;
+        endpoint = this.renderHorizontalGrounds(endpoint.x,endpoint.y,1);
+        endpoint.x -= 200;
+        endpoint.y += 100;
+        this.renderHorizontalGrounds(endpoint.x,endpoint.y,2);
+        endpoint.x -= 100;
+        endpoint.y += 100;
+        this.renderHorizontalGrounds(endpoint.x,endpoint.y,3);
+        endpoint.x = 50;
+        endpoint.y += 100;
+        this.renderHorizontalGrounds(endpoint.x,endpoint.y,14);
         
     }
     renderVerticalGrounds(startX,startY,count){

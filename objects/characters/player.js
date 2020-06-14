@@ -5,19 +5,19 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         scene.anims.create({
             key: `${texture}-left`,
-            frames: scene.anims.generateFrameNumbers(texture, { start: 0, end: 3 }),
+            frames: scene.anims.generateFrameNumbers(texture, { start: 1, end: 8 }),
             frameRate: 10,
             repeat: -1
         });
         scene.anims.create({
             key: `${texture}-turn`,
-            frames: [ { key: texture, frame: 4 } ],
+            frames: [ { key: texture, frame: 0 } ],
             frameRate: 20
         });
 
         scene.anims.create({
             key: `${texture}-right`,
-            frames: scene.anims.generateFrameNumbers(texture, { start: 5, end: 8 }),
+            frames: scene.anims.generateFrameNumbers(texture, { start: 10, end: 17 }),
             frameRate: 10,
             repeat: -1
         });

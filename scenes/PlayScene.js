@@ -23,7 +23,7 @@ export default class PlayScene extends Phaser.Scene {
         this.load.image(this.config.key.background,this.config.dir.assets+'map/background.png');
         this.load.image(this.config.key.ground,this.config.dir.assets+'map/ground.png');
 
-        this.load.spritesheet(this.config.key.player, this.config.dir.assets+'dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet(this.config.key.player, this.config.dir.assets+'sprite/player.png', { frameWidth: 40, frameHeight: 40 });
     }
 
 

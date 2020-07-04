@@ -30,6 +30,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     move(){
+        this.movingX = true;
+        this.movingY = true;
         if(this.cursor.right.isDown){
             this.right = true;
             this.trackLeftOrRight();
@@ -38,15 +40,24 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             this.right = false;
             this.trackLeftOrRight();
             this.setVelocityX(-this.velocity);
-        }else if(this.cursor.up.isDown){
+        }else{
+            this.movingX = false;
+            this.setVelocityX(0);
+        }
+
+        if(this.cursor.up.isDown){
             this.trackLeftOrRight();
             this.setVelocityY(-this.velocity);
         }else if(this.cursor.down.isDown){
             this.trackLeftOrRight();
             this.setVelocityY(this.velocity);
         }else{
+            this.movingY = false;
+            this.setVelocityY(0);
+        }
+
+        if(!(this.movingX || this.movingY)){
             this.anims.play(`${this.texture.key}-turn`,true);
-            this.setVelocity(0,0);
         }
     }
     trackLeftOrRight(){

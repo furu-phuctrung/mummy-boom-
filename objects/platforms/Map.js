@@ -16,6 +16,7 @@ export default class Map extends Phaser.Physics.Arcade.StaticGroup{
     renderMap(){
 
         //Vertical
+        this.renderVerticalGrounds(50,0,1);
         let endpoint = this.renderVerticalGrounds(0,0,12);
         endpoint.x += 100;
         endpoint.y = 0;

@@ -1,4 +1,4 @@
-import config from './config.js';
+import config from '../config.js';
 export default class LoadScene extends Phaser.Scene {
     preload() {
         this.load.image(config.key.background,config.dir.assets+'map/background.png');

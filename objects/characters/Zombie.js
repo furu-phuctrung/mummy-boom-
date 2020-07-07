@@ -1,6 +1,17 @@
 import ZombieAI from '../../utilities/ZombieAI.js'
+export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
+    constructor(scene,texture){
+        super(scene.physics.world,scene)
+        this.texture = texture;
+    }
 
-export default class Player extends Phaser.Physics.Arcade.Sprite {
+    createRandomZombie(){
+        let newZombie = new Zombie(this.scene,50,50,this.texture);
+        this.add(newZombie);
+    }
+}
+
+class Zombie extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture)
         scene.add.existing(this);
@@ -130,3 +141,4 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 }
+

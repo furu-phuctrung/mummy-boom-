@@ -1,25 +1,19 @@
+import {Matrix} from '../objects/platforms/Map.js'
 export default class ZombieAI{
     constructor(){
         this.directions={};
         this.goal = {};
     }
     getMapByMatrix(goal){
-        let matrix=[
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-            [1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
-            [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-            [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-            [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1],
-            [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-            [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
-            [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-        ]
-        matrix[goal.y][goal.x] = 2
-        return matrix
+        let matrix=[];
+        Matrix.forEach((row,y)=>{
+            matrix.push([]);
+            row.forEach(e=>{
+                matrix[y].push(e);
+            })
+        })
+        matrix[goal.y][goal.x] = 2;
+        return matrix;
     }
     tryMoving(point, prePoint, preDir) {
         let isRightWay = false;

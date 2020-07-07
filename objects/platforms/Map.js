@@ -1,3 +1,17 @@
+export const Matrix = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+]
 export default class Map extends Phaser.Physics.Arcade.StaticGroup{
     constructor(scene,ground,background){
         super(scene.physics.world,scene);
@@ -14,99 +28,17 @@ export default class Map extends Phaser.Physics.Arcade.StaticGroup{
     }
 
     renderMap(){
-
-        //Vertical
-        this.renderVerticalGrounds(50,0,1);
-        let endpoint = this.renderVerticalGrounds(0,0,12);
-        endpoint.x += 100;
-        endpoint.y = 0;
-        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,4);
-        endpoint.y += 50;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
-        endpoint.y -= 100;
-        endpoint.x += 50;
-        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
-        endpoint.y -= 100;
-        endpoint.x += 100;
-        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
-        endpoint.y -= 100;
-        endpoint.x += 100;
-        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
-        endpoint.x += 100;
-        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
-        endpoint.y -= 100;
-        endpoint.x += 100;
-        endpoint = this.renderVerticalGrounds(endpoint.x,endpoint.y,1);
-        endpoint.x += 50;
-        endpoint.y += 50;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,3);
-        endpoint.x += 50;
-        endpoint.y -= 50;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,2);
-        endpoint.x += 100;
-        endpoint.y -= 100;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,12);
-        endpoint = this.renderVerticalGrounds(200,350,3);
-        endpoint.x += 100;
-        endpoint.y -= 250;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
-        endpoint.x += 100;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
-        endpoint.x += 100;
-        endpoint.y -= 100;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,5);
-        endpoint.x += 150;
-        endpoint.y += 200;
-        this.renderVerticalGrounds(endpoint.x,endpoint.y,3);
-
-
-        //Horizontal
-        endpoint = this.renderHorizontalGrounds(150,0,12);
-        endpoint.x = 250;
-        endpoint.y += 150;
-        endpoint = this.renderHorizontalGrounds(endpoint.x,endpoint.y,5);
-        endpoint.x = 150;
-        endpoint.y += 100;
-        endpoint = this.renderHorizontalGrounds(endpoint.x,endpoint.y,3);
-        endpoint.x += 400;
-        endpoint = this.renderHorizontalGrounds(endpoint.x,endpoint.y,1);
-        endpoint.x -= 200;
-        endpoint.y += 100;
-        this.renderHorizontalGrounds(endpoint.x,endpoint.y,2);
-        endpoint.x -= 100;
-        endpoint.y += 100;
-        this.renderHorizontalGrounds(endpoint.x,endpoint.y,3);
-        endpoint.x = 50;
-        endpoint.y += 100;
-        this.renderHorizontalGrounds(endpoint.x,endpoint.y,14);
+        let newGround;
+        Matrix.forEach((row,y)=>{
+            row.forEach((cell,x)=>{
+                if(cell == 1){
+                    newGround = new Phaser.Physics.Arcade.Image(this.scene, x*50, y*50, this.ground.key);
+                    this.scene.add.existing(newGround);
+                    newGround.setOrigin(0,0);
+                    this.add(newGround);
+                }
+            })
+        })
         
-    }
-    renderVerticalGrounds(startX,startY,count){
-        let endpoint ={
-            x: startX,
-            y: startY,
-        };
-        for(let i = 0; i<count; i++){
-            let newGround = new Phaser.Physics.Arcade.Image(this.scene, startX, endpoint.y, this.ground.key);
-            this.scene.add.existing(newGround);
-            endpoint.y+=this.ground.width;
-            newGround.setOrigin(0,0);
-            this.add(newGround);
-        }
-        return endpoint;
-    }
-    renderHorizontalGrounds(startX,startY,count){
-        let endpoint ={
-            x: startX,
-            y: startY,
-        };
-        for(let i = 0; i<count; i++){
-            let newGround = new Phaser.Physics.Arcade.Image(this.scene, endpoint.x, startY, this.ground.key);
-            this.scene.add.existing(newGround);
-            endpoint.x+=this.ground.width;
-            newGround.setOrigin(0,0);
-            this.add(newGround);
-        }
-        return endpoint;
     }
 }

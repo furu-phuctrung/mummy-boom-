@@ -1,4 +1,6 @@
 import Map from '../objects/platforms/Map.js'
+import {Matrix} from '../objects/platforms/Map.js'
+
 import Player from '../objects/characters/Player.js';
 import ZombieGenerator from '../objects/characters/Zombie.js';
 import Star from '../objects/platforms/Star.js'
@@ -24,8 +26,8 @@ export default class PlayScene extends Phaser.Scene {
         this.zombies = new ZombieGenerator(this,config.key.zombie);
         this.textScore = this.add.text(20,20,`Score: ${this.score}`);
         this.star = new Star(this,config.key.star);
-        this.star.createRandomStar();
-        this.zombies.createRandomZombie();
+        this.star.createStar(50,50);
+        this.zombies.createZombie(50,50);
 
         
         this.physics.add.collider(this.player,this.map);
@@ -37,15 +39,24 @@ export default class PlayScene extends Phaser.Scene {
         });
         this.physics.add.collider(this.star,this.player,(player,star)=>{
             star.destroy();
+            this.addNewZombieAndStar();
             this.score++;
             this.textScore.setText(`Score: ${this.score}`);
         });         
     }
 
+    addNewZombieAndStar(){
+        let x = 0, y = 0;
+        while(Matrix[y][x] == 1){
+            x = Math.floor(Math.random() * Matrix[y].length);
+            y = Math.floor(Math.random() * Matrix.length);
+        }
+        this.star.createStar(x*50,y*50);
+        this.zombies.createZombie(x*50,y*50);
+    }
+
     update() {
         this.player.move();
-        this.zombies.getChildren().forEach(z=>{
-            z.findPlayer()
-        });
+        this.zombies.findPlayer();
     }
 } 

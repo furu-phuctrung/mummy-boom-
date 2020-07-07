@@ -1,13 +1,23 @@
 import ZombieAI from '../../utilities/ZombieAI.js'
+import {Matrix} from '../platforms/Map.js'
 export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     constructor(scene,texture){
         super(scene.physics.world,scene)
         this.texture = texture;
+        this.generatePosition = {
+            x: 50,
+            y:50
+        } 
     }
 
-    createRandomZombie(){
-        let newZombie = new Zombie(this.scene,50,50,this.texture);
+    createZombie(x,y){
+        let newZombie = new Zombie(this.scene,x,y,this.texture);
         this.add(newZombie);
+    }
+    findPlayer(){
+        this.getChildren().forEach(z=>{
+            z.findPlayer();
+        })
     }
 }
 

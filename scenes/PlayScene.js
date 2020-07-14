@@ -22,7 +22,7 @@ export default class PlayScene extends Phaser.Scene {
     create() {
         
         this.map = new Map(this,config.key.ground,config.key.background);
-        this.player = new Player(this,700,50,config.key.player);
+        this.player = new Player(this,725,75,config.key.player);
         this.zombies = new ZombieGenerator(this,config.key.zombie);
         this.textScore = this.add.text(20,20,`Score: ${this.score}`);
         this.star = new Star(this,config.key.star);
@@ -30,7 +30,6 @@ export default class PlayScene extends Phaser.Scene {
         this.zombies.createZombie(50,50);
 
         
-        this.physics.add.collider(this.player,this.map);
         this.physics.add.collider(this.player,this.zombies,(p,z)=>{
             this.scene.start('endScene',{score:this.score});
         });
@@ -57,6 +56,5 @@ export default class PlayScene extends Phaser.Scene {
 
     update() {
         this.player.move();
-        this.zombies.findPlayer();
     }
 } 

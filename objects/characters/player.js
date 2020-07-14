@@ -1,3 +1,5 @@
+import {Matrix} from '../platforms/Map.js'
+
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture){
         super(scene, x, y, texture)
@@ -23,41 +25,38 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         });
 
         this.right = true;
-        this.setOrigin(0,0);
         this.setCollideWorldBounds(true);
         this.cursor = this.scene.input.keyboard.createCursorKeys();
-        this.velocity = 500;
+        this.moveTo = this.scene.plugins.get('rexMoveTo').add(this, {
+            speed: 200
+        });
+        this.isTurning = true;
+        this.moveTo.on('complete',(gameObject, moveTo)=>{
+            gameObject.anims.play(`${gameObject.texture.key}-turn`,true);
+            this.scene.zombies.findPlayer();
+        });
     }
 
     move(){
-        this.movingX = true;
-        this.movingY = true;
-        if(this.cursor.right.isDown){
-            this.right = true;
+        if(this.isTurning){
+            if(this.cursor.right.isDown){
+                this.right = true;
+                this.directTo(this.x+50, this.y);
+            }else if(this.cursor.left.isDown){
+                this.right = false;
+                this.directTo(this.x-50, this.y);
+            }else if(this.cursor.up.isDown){
+                this.directTo(this.x, this.y-50);
+            }else if(this.cursor.down.isDown){
+                this.directTo(this.x, this.y+50);
+            }
+        }    
+    }
+    directTo(x,y){
+        if(Matrix[Math.floor(y/50)][Math.floor(x/50)] != 1){
+            this.isTurning = false;
             this.trackLeftOrRight();
-            this.setVelocityX(this.velocity);
-        }else if(this.cursor.left.isDown){
-            this.right = false;
-            this.trackLeftOrRight();
-            this.setVelocityX(-this.velocity);
-        }else{
-            this.movingX = false;
-            this.setVelocityX(0);
-        }
-
-        if(this.cursor.up.isDown){
-            this.trackLeftOrRight();
-            this.setVelocityY(-this.velocity);
-        }else if(this.cursor.down.isDown){
-            this.trackLeftOrRight();
-            this.setVelocityY(this.velocity);
-        }else{
-            this.movingY = false;
-            this.setVelocityY(0);
-        }
-
-        if(!(this.movingX || this.movingY)){
-            this.anims.play(`${this.texture.key}-turn`,true);
+            this.moveTo.moveTo(x, y);
         }
     }
     trackLeftOrRight(){

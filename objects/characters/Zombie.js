@@ -11,7 +11,7 @@ export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     }
 
     createZombie(x,y){
-        let newZombie = new Zombie(this.scene,x,y,this.texture);
+        let newZombie = new Zombie(this.scene,x+25,y+25,this.texture);
         this.add(newZombie);
     }
     findPlayer(){
@@ -44,86 +44,49 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
-
+        this.stepPerTurn = 3;
+        this.stepInTurn = 0;
+        this.step = 1;
+        this.isTurning = false;
         this.right = true;
-        this.signVelocityX = false;
-        this.signVelocityY = false;
-        this.setOrigin(0, 0);
         this.setCollideWorldBounds(true);
-        this.cursor = this.scene.input.keyboard.createCursorKeys();
-        this.velocity = 100;
-        this.collideGround = {
-            left: false,
-            right: false,
-            up: false,
-            down: false
-        };
+        this.velocity = 100; 
         this.ai = new ZombieAI();
-    }
-
-    changeVelocity() {
-        this.collideGround.left = this.body.touching.left;
-        this.collideGround.right = this.body.touching.right;
-        this.collideGround.up = this.body.touching.up;
-        this.collideGround.down = this.body.touching.down;
+        this.directions = [];
+        this.moveTo = this.scene.plugins.get('rexMoveTo').add(this, {
+            speed: 200
+        });
+        this.moveTo.on('complete',(gameObject, moveTo)=>{
+            this.move();
+        });
     }
     findPlayer() {
-        let addPosY =this.signVelocityY ? 0 : 0;
-        let addPosX = this.signVelocityX ? 0 : 0;
         let currentPos = {
-            x: Math.round((this.x+addPosX)/50),
-            y: Math.round((this.y+addPosY)/50)
+            x: Math.floor(this.x/50),
+            y: Math.floor(this.y/50)
         };
+        currentPos = this.directions ? currentPos : this.directions[this.directions.length - 1] ;
         let playerPos = {
-            x: Math.round(this.scene.player.x/50),
-            y: Math.round(this.scene.player.y/50)
+            x: Math.floor(this.scene.player.x/50),
+            y: Math.floor(this.scene.player.y/50)
         }
-        this.directions = this.ai.getDirection(currentPos,playerPos);
+        this.ai.getDirection(currentPos,playerPos).reverse().forEach(dir => {
+            this.directions.push(dir);
+        });
+        console.log(this.directions);
         this.move();
-        this.goToStartPoint(currentPos);
+        
     }
     move(){
-        let addPosY =this.signVelocityY ? 40 : 0;
-        let addPosX = this.signVelocityX ? 40 : 0;
-        if(this.directions[`${Math.floor((this.x+addPosX)/50)}-${Math.floor((this.y+addPosY)/50)}`]){
-            let direction = this.directions[`${Math.floor((this.x+addPosX)/50)}-${Math.floor((this.y+addPosY)/50)}`];
-            this.setDirection(direction);
-        }
-    }
-    setDirection(dir){
-        this.movingX = true;
-        this.movingY = true;
-        if(dir == 'right'){
-            this.right = true;
-            this.signVelocityX = false;
-            this.trackLeftOrRight();
-            this.setVelocityX(this.velocity);
-        }else if(dir == 'left'){    
-            this.right = false;
-            this.signVelocityX = true;
-            this.trackLeftOrRight();
-            this.setVelocityX(-this.velocity);
+        let pos = {};
+        if(this.stepInTurn < this.stepPerTurn) {
+            pos = this.directions.shift();
+            this.step++;
+            this.stepInTurn++;
+            this.moveTo.moveTo(pos.x*50+25,pos.y*50+25);
         }else{
-            this.movingX = false;
-            this.signVelocityX = false;
-            this.setVelocityX(0);
-        }
-
-        if(dir == 'up'){
-            this.signVelocityY = true;
-            this.trackLeftOrRight();
-            this.setVelocityY(-this.velocity);
-        }else if(dir == 'down'){
-            this.signVelocityY = false;
-            this.trackLeftOrRight();
-            this.setVelocityY(this.velocity);
-        }else{
-            this.movingY = false;
-            this.signVelocityY = false;
-            this.setVelocityY(0);
-        }
-
-        if(!(this.movingX || this.movingY)){
+            this.stepInTurn = 0;
+            this.scene.player.isTurning = true;
             this.anims.play(`${this.texture.key}-turn`,true);
         }
     }
@@ -132,22 +95,6 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             this.anims.play(`${this.texture.key}-right`,true);
         }else{
             this.anims.play(`${this.texture.key}-left`,true);
-        }
-    }
-    goToStartPoint(startPoint){
-        if(this.body.touching.left || this.body.touching.right){
-            if(this.y > startPoint.y){
-                this.setVelocityY(-this.velocity);
-            }else if(this.y < startPoint.y){
-                this.setVelocityY(this.velocity);
-            }
-        }
-        if(this.body.touching.up || this.body.touching.down){
-            if(this.x > startPoint.x){
-                this.setVelocityX(-this.velocity);
-            }else if(this.x < startPoint.x){
-                this.setVelocityX(this.velocity);
-            }
         }
     }
 }

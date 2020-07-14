@@ -1,8 +1,8 @@
-import './node_modules/phaser/dist/phaser.js'
+import './node_modules/phaser/dist/phaser.js';
+import MoveToPlugin from './node_modules/phaser3-rex-plugins/plugins/moveto-plugin.js';
 import PlayScene from './scenes/PlayScene.js';
 import LoadScene from './scenes/LoadScene.js';
 import EndScene from './scenes/EndScene.js';
-
 
 /**
  * Config game window
@@ -19,6 +19,14 @@ let config = {
             gravity: { y: 0 },
             debug:true,
         }
+    },
+    plugins: {
+        global: [{
+            key: 'rexMoveTo',
+            plugin: MoveToPlugin,
+            start: true
+        },
+        ]
     },
     scene: [LoadScene,PlayScene,EndScene]
 };

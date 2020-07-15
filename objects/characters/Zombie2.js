@@ -1,4 +1,4 @@
-import ZombieAI from '../../utilities/ZombieAI.js'
+import ZombieA from '../../utilities/ZombieA.js'
 export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     constructor(scene,texture){
         super(scene.physics.world,scene)
@@ -10,7 +10,7 @@ export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     }
 
     createZombie(x,y){
-        let newZombie = new Zombie(this.scene,x+25,y+25,this.texture);
+        let newZombie = new Zombie2(this.scene,x+25,y+25,this.texture);
         this.add(newZombie);
     }
     findPlayer(){
@@ -20,7 +20,7 @@ export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     }
 }
 
-class Zombie extends Phaser.Physics.Arcade.Sprite {
+class Zombie2 extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture)
         scene.add.existing(this);
@@ -50,7 +50,7 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
         this.right = true;
         this.setCollideWorldBounds(true);
         this.velocity = 100; 
-        this.ai = new ZombieAI();
+        this.ai = new ZombieA();
         this.directions = [];
         this.moveTo = this.scene.plugins.get('rexMoveTo').add(this, {
             speed: 200

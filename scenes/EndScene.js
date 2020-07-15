@@ -12,7 +12,7 @@ export default class EndScene extends Phaser.Scene {
         let text = this.add.text(0,0,`Press enter to again !!! \n Score:${this.score}`, { font: "bold 32px Arial", fill: "#fff",align: 'center'});
         Phaser.Display.Align.In.Center(text,this.add.zone(400, 300, 800, 600));
         this.input.keyboard.on('keydown-' + 'ENTER', (event)=>{
-            this.scene.start('playScene');
+            this.scene.start('playScene2');
         });
     }
 }

@@ -11,7 +11,7 @@ import config from '../config.js';
  * 
  */
 
-export default class PlayScene extends Phaser.Scene {
+export default class PlayScene1 extends Phaser.Scene {
     constructor(){
         super('playScene');
     }

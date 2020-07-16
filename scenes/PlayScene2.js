@@ -34,7 +34,6 @@ export default class playScene2 extends Phaser.Scene {
             this.scene.start('endScene',{score:this.score});
         });
         this.physics.add.collider(this.zombies,this.map,(zombies,map)=>{
-            zombies.changeVelocity();
         });
         this.physics.add.collider(this.star,this.player,(player,star)=>{
             star.destroy();

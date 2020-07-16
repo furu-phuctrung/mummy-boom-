@@ -43,9 +43,8 @@ class Zombie2 extends Phaser.Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
-        this.stepPerTurn = 3;
+        this.stepPerTurn = 1;
         this.stepInTurn = 0;
-        this.step = 1;
         this.isTurning = false;
         this.right = true;
         this.setCollideWorldBounds(true);
@@ -80,7 +79,6 @@ class Zombie2 extends Phaser.Physics.Arcade.Sprite {
         if(this.stepInTurn < this.stepPerTurn) {
             pos = this.directions.shift();
             console.log(pos);
-            this.step++;
             this.stepInTurn++;
             this.moveTo.moveTo(pos.x*50+25,pos.y*50+25);
         }else{

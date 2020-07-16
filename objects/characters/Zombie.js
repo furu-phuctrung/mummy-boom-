@@ -12,10 +12,16 @@ export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     createZombie(x,y){
         let newZombie = new Zombie(this.scene,x+25,y+25,this.texture);
         this.add(newZombie);
+        newZombie.findPlayer();
     }
     findPlayer(){
+        let playerPos = {
+            x: Math.floor(this.scene.player.x/50),
+            y: Math.floor(this.scene.player.y/50)
+        }
         this.getChildren().forEach(z=>{
-            z.findPlayer();
+            z.directions.push(playerPos);
+            z.move();
         })
     }
 }
@@ -43,9 +49,8 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
-        this.stepPerTurn = 3;
+        this.stepPerTurn = 1;
         this.stepInTurn = 0;
-        this.step = 1;
         this.isTurning = false;
         this.right = true;
         this.setCollideWorldBounds(true);
@@ -69,18 +74,12 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             x: Math.floor(this.scene.player.x/50),
             y: Math.floor(this.scene.player.y/50)
         }
-        this.ai.getDirection(currentPos,playerPos).reverse().forEach(dir => {
-            this.directions.push(dir);
-        });
-        this.move();
-        
+        this.directions = this.ai.getDirection(currentPos,playerPos).reverse();
     }
     move(){
         let pos = {};
         if(this.stepInTurn < this.stepPerTurn) {
             pos = this.directions.shift();
-            console.log(pos);
-            this.step++;
             this.stepInTurn++;
             this.moveTo.moveTo(pos.x*50+25,pos.y*50+25);
         }else{

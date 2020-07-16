@@ -13,7 +13,7 @@ import config from '../config.js';
 
 export default class PlayScene1 extends Phaser.Scene {
     constructor(){
-        super('playScene');
+        super('playScene1');
     }
 
     init(){
@@ -32,9 +32,6 @@ export default class PlayScene1 extends Phaser.Scene {
         
         this.physics.add.collider(this.player,this.zombies,(p,z)=>{
             this.scene.start('endScene',{score:this.score});
-        });
-        this.physics.add.collider(this.zombies,this.map,(zombies,map)=>{
-            zombies.changeVelocity();
         });
         this.physics.add.collider(this.star,this.player,(player,star)=>{
             star.destroy();

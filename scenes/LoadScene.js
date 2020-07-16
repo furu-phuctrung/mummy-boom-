@@ -14,7 +14,7 @@ export default class LoadScene extends Phaser.Scene {
         let text = this.add.text(0,0,`Spress ENTER to start`, { font: "bold 32px Arial", fill: "#fff",align: 'center'});
         Phaser.Display.Align.In.Center(text,this.add.zone(400, 300, 800, 600));
         this.input.keyboard.on('keydown-' + 'ENTER', (event)=>{
-            this.scene.start('playScene2');
+            this.scene.start('playScene1');
         });
     }
 }

@@ -20,7 +20,7 @@ npm install
 ## Running
 
 ```
-npx serve
+npm start
 ```
 
-Go to [Localhost](http://localhost:5000) on browser to enjoy!!!
+Go to [Localhost](http://localhost:8080) on browser to enjoy!!!

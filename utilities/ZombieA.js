@@ -1,68 +1,87 @@
-import {Matrix} from '../objects/platforms/Map.js'
-export default class ZombieA{
-    constructor(){
-        this.directions={};
+import { Matrix } from '../objects/platforms/Map.js'
+export default class ZombieA {
+    constructor() {
+        this.directions = {};
         this.goal = {};
     }
-    getMapByMatrix(goal){
-        let matrix=[];
-        Matrix.forEach((row,y)=>{
+    getMapByMatrix(goal) {
+        let matrix = [];
+        Matrix.forEach((row, y) => {
             matrix.push([]);
-            row.forEach(e=>{
+            row.forEach(e => {
                 matrix[y].push(e);
             })
         })
         matrix[goal.y][goal.x] = 2;
         return matrix;
     }
-    tryMoving(point) {
-        let isRightWay = false;
-        if (this.matrix[point.y][point.x] == 1 || this.matrix[point.y][point.x] == 3) {
-            return false;
-        } else if (this.matrix[point.y][point.x] == 2) {
-            this.directions.push(point);
-            return true;
-        } else if (this.matrix[point.y][point.x] == 0) {
-            this.matrix[point.y][point.x] = 3;
-            
-            //Up
-            isRightWay = isRightWay || this.tryMoving(
-                {
-                    x: point.x,
-                    y: point.y - 1,
-                });
-            //Right
-            isRightWay = isRightWay || this.tryMoving(
-                {
-                    x: point.x + 1,
-                    y: point.y,
-                });
-            //Down
-            isRightWay = isRightWay || this.tryMoving(
-                {
-                    x: point.x,
-                    y: point.y + 1,
-                });
-            // Left
-            isRightWay = isRightWay || this.tryMoving(
-                {
-                    x: point.x - 1,
-                    y: point.y,
-                });
-            
-                // Finally
-            if (isRightWay) {
-                this.directions.push(point);
-            }
-            return isRightWay;
-        }
+    distance(firstPoint, secondPoint) {
+
+        return (firstPoint.x - secondPoint.x) * (firstPoint.x - secondPoint.x) + (firstPoint.y - secondPoint.y) * (firstPoint.y - secondPoint.y);
     }
-    getDirection(startPoint,goal){
+    checkPoint(point) {
+        return Matrix[point.y][point.x] == 1 || Matrix[point.y][point.x] == 3? false : true;
+    }
+    tryMoving(point, goal) {
+
+        let ways = [{ x: point.x, y: point.y + 1 },
+        { x: point.x, y: point.y - 1 },
+        { x: point.x - 1, y: point.y },
+        { x: point.x + 1, y: point.y }
+        ];
+
+        let validWays = [];
+        for (let p of ways)
+            if (this.checkPoint(p))
+                validWays.push(p);
+        let minDis = this.distance(validWays[0], goal);
+        let minPoint = validWays[0];
+        for (let p of validWays)
+            if (this.distance(p, goal) < minDis)
+                minPoint = p;
+        this.directions.push(minPoint);
+
+        ways = [{ x: minPoint.x, y: minPoint.y + 1 },
+        { x: minPoint.x, y: minPoint.y - 1 },
+        { x: minPoint.x - 1, y: minPoint.y },
+        { x: minPoint.x + 1, y: minPoint.y }
+        ];
+        validWays = [];
+        for (let p of ways)
+            if (this.checkPoint(p))
+                validWays.push(p);
+        minDis = this.distance(validWays[0], goal);
+        minPoint = validWays[0];
+        for (let p of validWays)
+            if (this.distance(p, goal) < minDis)
+                minPoint = p;
+        this.directions.push(minPoint);
+        ways = [{ x: minPoint.x, y: minPoint.y + 1 },
+        { x: minPoint.x, y: minPoint.y - 1 },
+        { x: minPoint.x - 1, y: minPoint.y },
+        { x: minPoint.x + 1, y: minPoint.y }
+        ];
+
+        validWays = [];
+        for (let p of ways)
+            if (this.checkPoint(p))
+                validWays.push(p);
+        minDis = this.distance(validWays[0], goal);
+        minPoint = validWays[0];
+        for (let p of validWays)
+            if (this.distance(p, goal) < minDis)
+                minPoint = p;
+        this.directions.push(minPoint);
+
+
+    }
+    getDirection(startPoint, goal) {
         //player
         this.goal = goal;
+        this.directions = [];
+        this.tryMoving(startPoint, goal);
         //player = 2
         this.matrix = this.getMapByMatrix(goal);
-
-        return this.directions;
+        return this.directions.reverse();
     }
 }

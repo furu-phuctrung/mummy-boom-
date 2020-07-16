@@ -4,7 +4,10 @@ let config = {
         ground:'ground',
         player:'player',
         zombie:'zombie',
-        star:'star'
+        star:'star',
+        screen:{
+            load:'loadScreen',
+        }
     },
     dir:{
         assets:'../assets/',

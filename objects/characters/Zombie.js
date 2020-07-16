@@ -12,16 +12,10 @@ export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     createZombie(x,y){
         let newZombie = new Zombie(this.scene,x+25,y+25,this.texture);
         this.add(newZombie);
-        newZombie.findPlayer();
     }
     findPlayer(){
-        let playerPos = {
-            x: Math.floor(this.scene.player.x/50),
-            y: Math.floor(this.scene.player.y/50)
-        }
         this.getChildren().forEach(z=>{
-            z.directions.push(playerPos);
-            z.move();
+            z.findPlayer();
         })
     }
 }
@@ -51,6 +45,7 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
         });
         this.stepPerTurn = 1;
         this.stepInTurn = 0;
+        this.turn = 1;
         this.isTurning = false;
         this.right = true;
         this.setCollideWorldBounds(true);
@@ -69,12 +64,13 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             x: Math.floor(this.x/50),
             y: Math.floor(this.y/50)
         };
-        currentPos = this.directions ? currentPos : this.directions[this.directions.length - 1] ;
         let playerPos = {
             x: Math.floor(this.scene.player.x/50),
             y: Math.floor(this.scene.player.y/50)
         }
         this.directions = this.ai.getDirection(currentPos,playerPos).reverse();
+        console.log(this.directions);
+        this.move();
     }
     move(){
         let pos = {};
@@ -83,7 +79,6 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             this.stepInTurn++;
             this.moveTo.moveTo(pos.x*50+25,pos.y*50+25);
         }else{
-            console.log(this.directions.length);
             this.stepInTurn = 0;
             this.scene.player.isTurning = true;
             this.anims.play(`${this.texture.key}-turn`,true);

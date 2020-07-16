@@ -18,7 +18,7 @@ let config = {
         arcade: {
             fps: 60,
             gravity: { y: 0 },
-            debug:true,
+            debug:false,
         }
     },
     plugins: {

@@ -52,7 +52,7 @@ class Zombie2 extends Phaser.Physics.Arcade.Sprite {
         this.ai = new ZombieA();
         this.directions = [];
         this.moveTo = this.scene.plugins.get('rexMoveTo').add(this, {
-            speed: 200
+            speed: 400
         });
         this.moveTo.on('complete',(gameObject, moveTo)=>{
             this.move();

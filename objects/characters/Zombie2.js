@@ -43,7 +43,7 @@ class Zombie2 extends Phaser.Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
-        this.stepPerTurn = 3;
+        this.stepPerTurn = 1;
         this.stepInTurn = 0;
         this.step = 1;
         this.isTurning = false;

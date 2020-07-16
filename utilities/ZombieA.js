@@ -20,7 +20,7 @@ export default class ZombieA {
         return (firstPoint.x - secondPoint.x) * (firstPoint.x - secondPoint.x) + (firstPoint.y - secondPoint.y) * (firstPoint.y - secondPoint.y);
     }
     checkPoint(point) {
-        return Matrix[point.y][point.x] == 1 || Matrix[point.y][point.x] == 3? false : true;
+        return Matrix[point.y][point.x] == 1 ? false : true;
     }
     tryMoving(point, goal) {
 
@@ -40,40 +40,6 @@ export default class ZombieA {
             if (this.distance(p, goal) < minDis)
                 minPoint = p;
         this.directions.push(minPoint);
-
-        ways = [{ x: minPoint.x, y: minPoint.y + 1 },
-        { x: minPoint.x, y: minPoint.y - 1 },
-        { x: minPoint.x - 1, y: minPoint.y },
-        { x: minPoint.x + 1, y: minPoint.y }
-        ];
-        validWays = [];
-        for (let p of ways)
-            if (this.checkPoint(p))
-                validWays.push(p);
-        minDis = this.distance(validWays[0], goal);
-        minPoint = validWays[0];
-        for (let p of validWays)
-            if (this.distance(p, goal) < minDis)
-                minPoint = p;
-        this.directions.push(minPoint);
-        ways = [{ x: minPoint.x, y: minPoint.y + 1 },
-        { x: minPoint.x, y: minPoint.y - 1 },
-        { x: minPoint.x - 1, y: minPoint.y },
-        { x: minPoint.x + 1, y: minPoint.y }
-        ];
-
-        validWays = [];
-        for (let p of ways)
-            if (this.checkPoint(p))
-                validWays.push(p);
-        minDis = this.distance(validWays[0], goal);
-        minPoint = validWays[0];
-        for (let p of validWays)
-            if (this.distance(p, goal) < minDis)
-                minPoint = p;
-        this.directions.push(minPoint);
-
-
     }
     getDirection(startPoint, goal) {
         //player
@@ -82,6 +48,6 @@ export default class ZombieA {
         this.tryMoving(startPoint, goal);
         //player = 2
         this.matrix = this.getMapByMatrix(goal);
-        return this.directions.reverse();
+        return this.directions;
     }
 }

@@ -1,9 +1,9 @@
-import Map from '../objects/platforms/Map.js'
-import {Matrix} from '../objects/platforms/Map.js'
+import Map from '../objects/platforms/map.js'
+import {Matrix} from '../objects/platforms/map.js'
 
-import Player from '../objects/characters/Player.js';
-import ZombieGenerator from '../objects/characters/Zombie2.js';
-import Star from '../objects/platforms/Star.js'
+import Player from '../objects/characters/player.js';
+import ZombieGenerator from '../objects/characters/zombie2.js';
+import Star from '../objects/platforms/star.js'
 import config from '../config.js';
 
 /**

@@ -1,5 +1,5 @@
-import './node_modules/phaser/dist/phaser.js';
-import MoveToPlugin from './node_modules/phaser3-rex-plugins/plugins/moveto-plugin.js';
+import 'phaser/dist/phaser';
+import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import PlayScene1 from './scenes/playscene1.js';
 import PlayScene2 from './scenes/playscene2.js';
 import PlayScene3 from './scenes/playscene3.js';

@@ -1,4 +1,4 @@
-import {Matrix} from '../platforms/Map.js'
+import {Matrix} from '../platforms/map.js'
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture){

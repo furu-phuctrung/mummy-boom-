@@ -1,4 +1,4 @@
-import ZombieA from '../../utilities/Minimax.js'
+import ZombieA from '../../utilities/minimax.js'
 export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     constructor(scene,texture){
         super(scene.physics.world,scene)

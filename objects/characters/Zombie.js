@@ -1,4 +1,4 @@
-import ZombieAI from '../../utilities/ZombieAI.js'
+import ZombieAI from '../../utilities/zombieAI.js'
 export default class ZombieGenerator extends Phaser.Physics.Arcade.Group{
     constructor(scene,texture){
         super(scene.physics.world,scene)

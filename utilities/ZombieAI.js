@@ -1,4 +1,4 @@
-import {Matrix} from '../objects/platforms/Map.js'
+import {Matrix} from '../objects/platforms/map.js'
 export default class ZombieAI{
     constructor(){
         this.directions={};

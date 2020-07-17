@@ -3,6 +3,7 @@ import MoveToPlugin from './node_modules/phaser3-rex-plugins/plugins/moveto-plug
 import PlayScene1 from './scenes/PlayScene1.js';
 import PlayScene2 from './scenes/PlayScene2.js';
 import PlayScene3 from './scenes/PlayScene3.js';
+import PlayScene4 from './scenes/PlayScene4.js';
 import LoadScene from './scenes/LoadScene.js';
 import EndScene from './scenes/EndScene.js';
 
@@ -30,6 +31,6 @@ let config = {
         },
         ]
     },
-    scene: [LoadScene,PlayScene1,PlayScene2,PlayScene3,EndScene]
+    scene: [LoadScene,PlayScene1,PlayScene2,PlayScene3,PlayScene4,EndScene]
 };
 let game = new Phaser.Game(config);

@@ -21,5 +21,8 @@ export default class LoadScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-' + 'THREE', (event)=>{
             this.scene.start('playScene3');
         });
+        this.input.keyboard.on('keydown-' + 'FOUR', (event)=>{
+            this.scene.start('playScene4');
+        });
     }
 }

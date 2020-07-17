@@ -1,5 +1,8 @@
 import config from '../config.js';
 export default class LoadScene extends Phaser.Scene {
+    constructor(){
+        super('loadScene');
+    }
     preload() {
         this.load.image(config.key.background,config.dir.assets+'map/background.png');
         this.load.image(config.key.screen.load,config.dir.assets+'map/load-screen.png');

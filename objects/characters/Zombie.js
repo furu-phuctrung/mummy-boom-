@@ -69,23 +69,25 @@ class Zombie extends Phaser.Physics.Arcade.Sprite {
             y: Math.floor(this.scene.player.y/50)
         }
         this.directions = this.ai.getDirection(currentPos,playerPos).reverse();
-        console.log(this.directions);
         this.move();
     }
     move(){
         let pos = {};
         if(this.stepInTurn < this.stepPerTurn) {
             pos = this.directions.shift();
+            pos.x = pos.x*50+25;
+            pos.y= pos.y*50+25;
             this.stepInTurn++;
-            this.moveTo.moveTo(pos.x*50+25,pos.y*50+25);
+            this.leftOrRight(pos);
+            this.moveTo.moveTo(pos);
         }else{
             this.stepInTurn = 0;
             this.scene.player.isTurning = true;
             this.anims.play(`${this.texture.key}-turn`,true);
         }
     }
-    trackLeftOrRight(){
-        if(this.right){
+    leftOrRight(pos){
+        if(pos.x - this.x > 0){
             this.anims.play(`${this.texture.key}-right`,true);
         }else{
             this.anims.play(`${this.texture.key}-left`,true);

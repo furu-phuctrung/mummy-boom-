@@ -4,7 +4,7 @@ import {Matrix} from '../objects/platforms/Map.js'
 import ZombieGenerator from '../objects/characters/Zombie.js';
 import Star from '../objects/platforms/Star.js'
 import config from '../config.js';
-import Player from '../objects/characters/Player';
+import Player from '../objects/characters/Player.js';
 
 /**
  * Set up game objects

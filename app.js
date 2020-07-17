@@ -1,11 +1,11 @@
 import './node_modules/phaser/dist/phaser.js';
 import MoveToPlugin from './node_modules/phaser3-rex-plugins/plugins/moveto-plugin.js';
-import PlayScene1 from './scenes/PlayScene1.js';
-import PlayScene2 from './scenes/PlayScene2.js';
-import PlayScene3 from './scenes/PlayScene3.js';
-import PlayScene4 from './scenes/PlayScene4.js';
-import LoadScene from './scenes/LoadScene.js';
-import EndScene from './scenes/EndScene.js';
+import PlayScene1 from './scenes/playscene1.js';
+import PlayScene2 from './scenes/playscene2.js';
+import PlayScene3 from './scenes/playscene3.js';
+import PlayScene4 from './scenes/playscene4.js';
+import LoadScene from './scenes/loadscene.js';
+import EndScene from './scenes/endscene.js';
 
 /**
  * Config game window

@@ -7,4 +7,4 @@ const path = require('path');
 app.use('/',express.static(path.join(__dirname , '/')));
 
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`Game is running at http://localhost:${port}`))

@@ -16,11 +16,13 @@ Install packages:
 ```
 npm install
 ```
-
+## Build
+```
+npm build
+```
 ## Running
 
 ```
 npm start
 ```
-
 Go to [Localhost](http://localhost:8080) on browser to enjoy!!!

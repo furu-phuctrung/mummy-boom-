@@ -1,4 +1,4 @@
-# Mummy Boom
+# Mummy Star
 Project is used for education.
 ## Initialization
 Required [NodeJs](https://nodejs.org)
